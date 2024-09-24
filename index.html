@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>OneSignal Store Demo</title>
+
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
+    });
+  });
+
+  OneSignalDeferred.push(function() {
+    OneSignal.User.addEventListener('change', function (event) {
+      console.log('change', { event });
+    });
+  });
+
+  OneSignalDeferred.push(function() {
+    OneSignal.Slidedown.addEventListener('slidedownShown', function (event) {
+      console.log('slidedownShown', { event });
+    });
+  });
+
+
+
+
+</script>
+  
+  <!-- Migration Testing
+    Comment OneSignalMethods.js
+    Uncommnet Notix code, subscribe
+    Comment Notix code, uncomment OneSignal code
+    Return to site, you should be transferred to OneSignal 
+  -->
+  
+<!-- OneSignal Init
+  <script src="OneSignalMethods.js"></script>-->
+
+  <!-- NOTIX Code (for migration testing)
+    <script id="script">
+    var s = document.createElement("script")
+    s.src = "https://notix.io/ent/current/enot.min.js"
+    s.onload = function (sdk) {
+      sdk.startInstall(
+        {
+          "appId": "1005e25bd64c3e45b77459a994ade15",
+          "loadSettings": true
+        }
+      )
+    }
+    document.head.append(s)
+      </script>
+    -->
+
+
+<!-- font awesome-->
+  <script src="https://kit.fontawesome.com/b198ccf02e.js" crossorigin="anonymous"></script>
+
+  <link rel="manifest" href="manifest.json"/>
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google SignIn-->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id"
+    content="388536902528-eh74tcn8rd9beutdv6gs775n2aq71gd1.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</head>
+
+<body>
+  <div class="grid-container">
+    <header class="header">
+      <div class="left-menu">
+        <button onclick="openLeftMenu()">
+          <span class="nav-icon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+      </div>
+      <div class="brand">
+        <a href="/">OneSignal Store Demo</a>
+      </div>
+      <div class="cart-btn">
+        <span class="nav-icon">
+          <i class="fas fa-cart-plus"></i>
+        </span>
+        <div class="cart-items">0</div>
+      </div>
+    </header>
+    <!--left overlay -->
+    <aside class="left-overlay">
+
+      <button class="left-overlay-close-button" onclick="closeLeftMenu()">
+        <i class="fas fa-window-close"></i>
+      </button>
+      <h3 style="margin-top: 30px; padding-left: 100px; padding-top: 30px; padding-bottom: 10px;">Quick Examples</h3>
+      <hr>
+      <div class="left-overlay-content">
+        <h4>SignIn & SetExternalUserId</h4>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+
+        <h4>SignOut & RemoveExternalUserId</h4>
+        <button id="logOutRemoveExternalUserId" style="background-color: red; color:white;"
+          onclick="onSignOut()">SignOut &
+          RemoveExternalUserId</button>
+
+        <h4>Show Category Slidedown Prompt</h4>
+        <button id="showCategorySlidePrompt">Show Category Slidedown Prompt</button>
+
+        <h4>Show SMS & Email Slidedown Prompt</h4>
+        <button id="showSmsAndEmailSlidedown">Show SMS & Email Slidedown Prompt</button>
+
+        <h4>Get Email Updates</h4>
+        <form style="padding: 10px;">
+          <label>Email Address: </label>
+          <input type="email" id="email_field" value="your_email@email.com" />
+        </form>
+        <button id="updateEmailWithFieldsButton">Subscribe to Email</button>
+
+        <h4>Tag Example</h4>
+        <form style="padding: 10px;">
+          <label>Tag key:</label>
+          <input type="text" id="tagKey" value="tag_key_here" />
+          <br>
+          <label>Tag value:</label>
+          <input type="text" id="tagValue" value="tag_value_here" />
+        </form>
+        <button id="tagUserWithFieldsButton">Tag User With Field Values</button>
+
+        <h4>Update Name In Mixpanel, Segment.com, Amplitude</h4>
+        <form style="padding: 10px;">
+          <label>$first_name: </label>
+          <input type="text" id="$first_name" value="Billy" />
+          <br>
+          <label>$last_name: </label>
+          <input type="text" id="$last_name" value="Bob" />
+        </form>
+        <button id="updateNameInAnalytics">Update Name In Analytics</button>
+
+
+      </div>
+    </aside>
+    <!-- end left overlay -->
+    <!-- hero -->
+    <main class="hero">
+      <div class="banner">
+        <h1 class="banner-title">Sunglasses Collection</h1>
+        <button class="banner-btn">
+          <a href="#our-products">Shop Now</a>
+        </button>
+        <button class="banner-btn-green">
+          <a href="blog">Blog Coming Soon</a>
+        </button>
+      </div>
+    </main>
+    <!-- end hero -->
+    <!-- products -->
+    <section class="products-section">
+      <div class="section-title">
+        <h2 id="our-products">our products</h2>
+      </div>
+      <div class="products-center"></div>
+    </section>
+    <!-- end products -->
+    <!-- cart -->
+    <div class="cart-overlay">
+      <div class="cart">
+        <span class="close-cart">
+          <i class="fas fa-window-close"></i>
+        </span>
+        <h2>your cart</h2>
+        <div class="cart-content">
+          <!-- cart item added dynamically in app.js-->
+        </div>
+        <div class="cart-footer">
+          <h3>your total : $ <span class="cart-total">0</span></h3>
+          <button class="clear-cart banner-btn">clear cart</button>
+          <a href="checkout" class="checkout-btn">Checkout</a>
+        </div>
+      </div>
+    </div>
+    <!-- end cart -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="https://onesignal.com">Get started at OneSignal.com</a>
+      </div>
+    </footer>
+  </div>
+  <script>
+    function openLeftMenu() {
+      document.querySelector(".left-overlay").classList.add("open");
+    }
+    function closeLeftMenu() {
+      document.querySelector(".left-overlay").classList.remove("open");
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>
